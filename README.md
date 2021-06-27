@@ -16,7 +16,3 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-Correo para firebase: 
-BeeNeat123@gmail.com
-Password: 
-Fime123Veranos
