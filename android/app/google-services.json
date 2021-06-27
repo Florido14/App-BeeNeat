@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "228798024575",
+    "project_id": "beeneat-1c31b",
+    "storage_bucket": "beeneat-1c31b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228798024575:android:7d73b504dafc729180a84a",
+        "android_client_info": {
+          "package_name": "com.example.beeneatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228798024575-95e7h7upr8mjlf5ep1tads9jl69bm5e5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYLgHcIhoNH31XCcM6dssXznlyV6ALQBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228798024575-95e7h7upr8mjlf5ep1tads9jl69bm5e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
