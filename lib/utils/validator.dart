@@ -5,7 +5,7 @@ class Validator {
     }
 
     if (name.isEmpty) {
-      return 'Name can\'t be empty';
+      return 'El campo nombre no puede estar vacio';
     }
 
     return null;
@@ -20,9 +20,9 @@ class Validator {
         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
     if (email.isEmpty) {
-      return 'Email can\'t be empty';
+      return 'El correo no puede estar vacio';
     } else if (!emailRegExp.hasMatch(email)) {
-      return 'Enter a correct email';
+      return 'Ingresa el correctamente el correo';
     }
 
     return null;
@@ -34,9 +34,9 @@ class Validator {
     }
 
     if (password.isEmpty) {
-      return 'Password can\'t be empty';
-    } else if (password.length < 6) {
-      return 'Enter a password with length at least 6';
+      return 'La contraseña no puede estar vacia';
+    } else if (password.length < 5) {
+      return 'Ingresa una contraseña con al menos 5 caracteres';
     }
 
     return null;

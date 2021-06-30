@@ -39,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
 
     return firebaseApp;
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +54,17 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 24.0),
+                      padding: const EdgeInsets.only(bottom: 15.0),
                       child: Text(
-                        'Login',
-                        style: Theme.of(context).textTheme.headline1,
+                        'BeeNeat',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 80, color: Colors.white),
+                        textScaleFactor: 1,
                       ),
                     ),
                     Form(
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                               email: value,
                             ),
                             decoration: InputDecoration(
-                              hintText: "Email",
+                              hintText: "Usuario",
                               errorBorder: UnderlineInputBorder(
                                 borderRadius: BorderRadius.circular(6.0),
                                 borderSide: BorderSide(
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                               password: value,
                             ),
                             decoration: InputDecoration(
-                              hintText: "Password",
+                              hintText: "Contraseña",
                               errorBorder: UnderlineInputBorder(
                                 borderRadius: BorderRadius.circular(6.0),
                                 borderSide: BorderSide(
@@ -113,6 +114,10 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     Expanded(
                                       child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.black,
+                                          onPrimary: Colors.white,
+                                        ),
                                         onPressed: () async {
                                           _focusEmail.unfocus();
                                           _focusPassword.unfocus();
@@ -146,12 +151,12 @@ class _LoginPageState extends State<LoginPage> {
                                           }
                                         },
                                         child: Text(
-                                          'Sign In',
+                                          'Iniciar Sesión',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 24.0),
+                                    /* SizedBox(width: 24.0),
                                     Expanded(
                                       child: ElevatedButton(
                                         onPressed: () {
@@ -163,20 +168,35 @@ class _LoginPageState extends State<LoginPage> {
                                           );
                                         },
                                         child: Text(
-                                          'Register',
+                                          '¿Registrarte',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),
-                                    ),
+                                    ), */
                                   ],
-                                )
+                                ),
+                          const SizedBox(height: 30),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterPage(),
+                                ),
+                              );
+                            },
+                            child: const Text('¿Aún no tienes una cuenta?'),
+                          ),
                         ],
                       ),
                     )
                   ],
                 ),
               );
-              
             }
 
             return Center(
