@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -60,29 +61,29 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.only(left: 35.0, right: 35.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
-                        child: Image.asset("assets/images/Logo.png")
+                        padding: const EdgeInsets.only(bottom: 30.0),
+                        child: Image.asset("assets/images/Logo1.png")
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 15.0),
+                        padding: const EdgeInsets.only(bottom: 20.0),
                         child: Text(
                           'BeeNeat',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 70, color: Colors.white),
+                          style: TextStyle(fontSize: 40, color: Colors.white),
                           textScaleFactor: 1,
                         ),
                       ),
                        Padding(
-                        padding: const EdgeInsets.only(bottom: 90.0),
+                        padding: const EdgeInsets.only(bottom: 30.0),
                         child: Text(
                           'Planifica, organiza y crea tu siguiente proyecto',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 25, color: Colors.white70),
+                          style: TextStyle(fontSize: 25, color: Colors.grey),
                           textScaleFactor: 1,
                         ),
                       ),
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 8.0),
+                           // SizedBox(height: 5.0),
                             TextFormField(
                               controller: _passwordTextController,
                               focusNode: _focusPassword,
@@ -124,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 24.0),
+                           // SizedBox(height: 5.0),
                             _isProcessing
                                 ? CircularProgressIndicator()
                                 : Row(

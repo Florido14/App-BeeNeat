@@ -1,3 +1,4 @@
+import 'package:beeneatapp/src/Login.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,11 @@ class _RegisterPageState extends State<RegisterPage> {
   final _focusPassword = FocusNode();
 
   bool _isProcessing = false;
+  BoxDecoration myBoxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(10.0),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,124 +38,205 @@ class _RegisterPageState extends State<RegisterPage> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Register'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Form(
-                  key: _registerFormKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        controller: _nameTextController,
-                        focusNode: _focusName,
-                        validator: (value) => Validator.validateName(
-                          name: value,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Name",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
+          resizeToAvoidBottomInset: false,
+          body: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/fondologin.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding( padding: const EdgeInsets.all(50.0),
+                        child: Image.asset("assets/images/Logo1.png")
                       ),
-                      SizedBox(height: 16.0),
-                      TextFormField(
-                        controller: _emailTextController,
-                        focusNode: _focusEmail,
-                        validator: (value) => Validator.validateEmail(
-                          email: value,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Email",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16.0),
-                      TextFormField(
-                        controller: _passwordTextController,
-                        focusNode: _focusPassword,
-                        obscureText: true,
-                        validator: (value) => Validator.validatePassword(
-                          password: value,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 32.0),
-                      _isProcessing
-                          ? CircularProgressIndicator()
-                          : Row(
+                    Container(
+                      margin: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(5.0),
+                      decoration: myBoxDecoration(),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        _isProcessing = true;
-                                      });
-
-                                      if (_registerFormKey.currentState!
-                                          .validate()) {
-                                        User? user = await FireAuth
-                                            .registerUsingEmailPassword(
-                                          name: _nameTextController.text,
-                                          email: _emailTextController.text,
-                                          password:
-                                              _passwordTextController.text,
-                                        );
-
-                                        setState(() {
-                                          _isProcessing = false;
-                                        });
-
-                                        if (user != null) {
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfilePage(user: user),
+                                Form(
+                                  key: _registerFormKey,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 30.0),
+                                        child: Text(
+                                          'Crea una cuenta',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 25, color: Colors.black),
+                                          textScaleFactor: 1,
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        controller: _nameTextController,
+                                        focusNode: _focusName,
+                                        validator: (value) =>
+                                            Validator.validateName(
+                                          name: value,
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: "Nombre",
+                                          errorBorder: UnderlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            borderSide: BorderSide(
+                                              color: Colors.red,
                                             ),
-                                            ModalRoute.withName('/'),
-                                          );
-                                        }
-                                      }
-                                    },
-                                    child: Text(
-                                      'Sign up',
-                                      style: TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      TextFormField(
+                                        controller: _emailTextController,
+                                        focusNode: _focusEmail,
+                                        validator: (value) =>
+                                            Validator.validateEmail(
+                                          email: value,
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: "Correo",
+                                          errorBorder: UnderlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            borderSide: BorderSide(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.0),
+                                      TextFormField(
+                                        controller: _passwordTextController,
+                                        focusNode: _focusPassword,
+                                        obscureText: true,
+                                        validator: (value) =>
+                                            Validator.validatePassword(
+                                          password: value,
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: "Contraseña",
+                                          errorBorder: UnderlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            borderSide: BorderSide(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 32.0),
+                                      _isProcessing
+                                          ? CircularProgressIndicator()
+                                          : Row(
+                                              children: [
+                                                Expanded(
+                                                  child: ElevatedButton(
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _isProcessing = true;
+                                                      });
+
+                                                      if (_registerFormKey
+                                                          .currentState!
+                                                          .validate()) {
+                                                        User? user = await FireAuth
+                                                            .registerUsingEmailPassword(
+                                                          name: _nameTextController
+                                                              .text,
+                                                          email:
+                                                              _emailTextController
+                                                                  .text,
+                                                          password:
+                                                              _passwordTextController
+                                                                  .text,
+                                                        );
+
+                                                        setState(() {
+                                                          _isProcessing = false;
+                                                        });
+
+                                                        if (user != null) {
+                                                          Navigator.of(context)
+                                                              .pushAndRemoveUntil(
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ProfilePage(
+                                                                      user: user),
+                                                            ),
+                                                            ModalRoute.withName(
+                                                                '/'),
+                                                          );
+                                                        }
+                                                      }
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                        primary: Colors.white,
+                                                        side: BorderSide(
+                                                            width: 1,
+                                                            color: Colors.grey),
+                                                        elevation: 10,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            30)),
+                                                        padding:
+                                                            EdgeInsets.all(20)),
+                                                    child: Text(
+                                                      'Crear cuenta',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 30),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    textStyle: const TextStyle(
+                                      color: Colors.black,
                                     ),
                                   ),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('¿Ya tienes una cuenta?'),
                                 ),
+                                    ],
+                                  ),
+                                )
                               ],
-                            )
-                    ],
-                  ),
-                )
-              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 }
