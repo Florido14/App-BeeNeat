@@ -1,10 +1,13 @@
 import 'package:beeneatapp/src/Login.dart';
+import 'package:beeneatapp/src/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:beeneatapp/src/profile_page.dart';
 import 'package:beeneatapp/utils/fire_auth.dart';
 import 'package:beeneatapp/utils/validator.dart';
+import 'package:beeneatapp/src/home_page.dart';
+
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -50,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Center(
                 child: Column(
                   children: [
-                    Padding( padding: const EdgeInsets.all(50.0),
+                    Padding( padding: const EdgeInsets.all(60.0),
                         child: Image.asset("assets/images/Logo1.png")
                       ),
                     Container(
@@ -175,8 +178,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                                               .pushAndRemoveUntil(
                                                             MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  ProfilePage(
-                                                                      user: user),
+                                                                  HomePage(
+                                                                      ),
                                                             ),
                                                             ModalRoute.withName(
                                                                 '/'),

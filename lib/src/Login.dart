@@ -5,6 +5,7 @@ import 'package:beeneatapp/src/profile_page.dart';
 import 'package:beeneatapp/src/register.dart';
 import 'package:beeneatapp/utils/fire_auth.dart';
 import 'package:beeneatapp/utils/validator.dart';
+import 'package:beeneatapp/src/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,9 +31,9 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => ProfilePage(
-            user: user,
-          ),
+          builder: (context) => 
+          HomePage ()
+          //(ProfilePage( user: user),
         ),
       );
     }
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/fondologin.jpg"),
+              image: AssetImage("assets/images/Fondologin1.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 30.0),
+                        padding: const EdgeInsets.only(bottom: 20.0),
                         child: Image.asset("assets/images/Logo1.png")
                       ),
                       Padding(
@@ -79,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                        Padding(
-                        padding: const EdgeInsets.only(bottom: 30.0),
+                        padding: const EdgeInsets.only(bottom: 40.0),
                         child: Text(
                           'Planifica, organiza y crea tu siguiente proyecto',
                           textAlign: TextAlign.center,
@@ -91,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                         key: _formKey,
                         child: Column(
                           children: <Widget>[
+                            SizedBox(height: 50),
                             TextFormField(
                               controller: _emailTextController,
                               focusNode: _focusEmail,
@@ -107,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                           // SizedBox(height: 5.0),
+                            SizedBox(height: 5),
                             TextFormField(
                               controller: _passwordTextController,
                               focusNode: _focusPassword,
@@ -125,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                           // SizedBox(height: 5.0),
+                           SizedBox(height: 150.0),
                             _isProcessing
                                 ? CircularProgressIndicator()
                                 : Row(
@@ -166,7 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                                                     .pushReplacement(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        ProfilePage(user: user),
+                                                      HomePage (),
+                                                    //  ProfilePage(user: user),
                                                   ),
                                                 );
                                               }
