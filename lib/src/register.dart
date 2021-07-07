@@ -1,5 +1,6 @@
 import 'package:beeneatapp/src/Login.dart';
 import 'package:beeneatapp/src/home_page.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:beeneatapp/src/profile_page.dart';
@@ -7,11 +8,13 @@ import 'package:beeneatapp/utils/fire_auth.dart';
 import 'package:beeneatapp/utils/validator.dart';
 import 'package:beeneatapp/src/home_page.dart';
 
-
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
+
+final usuariosReferences =
+    FirebaseDatabase.instance.reference().child('Usuarios');
 
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
@@ -52,9 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Center(
                 child: Column(
                   children: [
-                    Padding( padding: const EdgeInsets.all(60.0),
-                        child: Image.asset("assets/images/Logo1.png")
-                      ),
+                    Padding(
+                        padding: const EdgeInsets.all(60.0),
+                        child: Image.asset("assets/images/Logo1.png")),
                     Container(
                       margin: const EdgeInsets.all(20.0),
                       padding: const EdgeInsets.all(5.0),
@@ -80,7 +83,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                           'Crea una cuenta',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              fontSize: 25, color: Colors.black),
+                                              fontSize: 25,
+                                              color: Colors.black),
                                           textScaleFactor: 1,
                                         ),
                                       ),
@@ -142,89 +146,107 @@ class _RegisterPageState extends State<RegisterPage> {
                                         ),
                                       ),
                                       SizedBox(height: 32.0),
-                                      _isProcessing
-                                          ? CircularProgressIndicator()
-                                          : Row(
-                                              children: [
-                                                Expanded(
-                                                  child: ElevatedButton(
-                                                    onPressed: () async {
-                                                      setState(() {
-                                                        _isProcessing = true;
-                                                      });
+                                      if (_isProcessing)
+                                        CircularProgressIndicator()
+                                      else
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: ElevatedButton(
+                                                onPressed: () async {
+                                                  setState(() {
+                                                    _isProcessing = true;
+                                                  });
 
-                                                      if (_registerFormKey
-                                                          .currentState!
-                                                          .validate()) {
-                                                        User? user = await FireAuth
-                                                            .registerUsingEmailPassword(
-                                                          name: _nameTextController
+                                                  if (_registerFormKey
+                                                      .currentState!
+                                                      .validate()) {
+                                                    User? user = await FireAuth
+                                                        .registerUsingEmailPassword(
+                                                      name: _nameTextController
+                                                          .text,
+                                                      email:
+                                                          _emailTextController
                                                               .text,
-                                                          email:
-                                                              _emailTextController
-                                                                  .text,
-                                                          password:
-                                                              _passwordTextController
-                                                                  .text,
+                                                      password:
+                                                          _passwordTextController
+                                                              .text,
+                                                    );
+
+                                                    setState(() {
+                                                      _isProcessing = false;
+                                                    });
+
+                                                    if (user != null) {
+                                                      usuariosReferences
+                                                          .push()
+                                                          .set({
+                                                        'Nombre':
+                                                            _nameTextController
+                                                                .text,
+                                                        'Correo':
+                                                            _emailTextController
+                                                                .text,
+                                                        'Password':
+                                                            _passwordTextController
+                                                                .text
+                                                      }).then((_) {
+                                                        Navigator.of(context)
+                                                            .pushAndRemoveUntil(
+                                                          MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    LoginPage(),
+                                                          ),
+                                                          ModalRoute.withName(
+                                                              '/'),
                                                         );
-
-                                                        setState(() {
-                                                          _isProcessing = false;
-                                                        });
-
-                                                        if (user != null) {
-                                                          Navigator.of(context)
-                                                              .pushAndRemoveUntil(
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  HomePage(
-                                                                      ),
-                                                            ),
-                                                            ModalRoute.withName(
-                                                                '/'),
-                                                          );
-                                                        }
-                                                      }
-                                                    },
-                                                    style: ElevatedButton.styleFrom(
-                                                        primary: Colors.white,
-                                                        side: BorderSide(
-                                                            width: 1,
-                                                            color: Colors.grey),
-                                                        elevation: 10,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30)),
-                                                        padding:
-                                                            EdgeInsets.all(20)),
-                                                    child: Text(
-                                                      'Crear cuenta',
-                                                      style: TextStyle(
-                                                          color: Colors.black),
-                                                    ),
-                                                  ),
+                                                      }).catchError((e) {
+                                                        print(e);
+                                                      });
+                                                    }
+                                                  }
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    side: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey),
+                                                    elevation: 10,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30)),
+                                                    padding:
+                                                        EdgeInsets.all(20)),
+                                                child: Text(
+                                                  'Crear cuenta',
+                                                  style: TextStyle(
+                                                      color: Colors.black),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                            const SizedBox(height: 30),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => LoginPage(),
+                                          ],
+                                        ),
+                                      const SizedBox(height: 30),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          textStyle: const TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => LoginPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: const Text(
+                                            '¿Ya tienes una cuenta?'),
                                       ),
-                                    );
-                                  },
-                                  child: const Text('¿Ya tienes una cuenta?'),
-                                ),
                                     ],
                                   ),
                                 )
