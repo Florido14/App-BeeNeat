@@ -33,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(
           builder: (context) => 
           HomePage ()
-          //(ProfilePage( user: user),
         ),
       );
     }
@@ -182,23 +181,6 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                         ),
                                       ),
-                                      /* SizedBox(width: 24.0),
-                                      Expanded(
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RegisterPage(),
-                                              ),
-                                            );
-                                          },
-                                          child: Text(
-                                            '¿Registrarte',
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                      ), */
                                     ],
                                   ),
                             const SizedBox(height: 30),

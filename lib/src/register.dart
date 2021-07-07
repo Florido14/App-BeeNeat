@@ -1,7 +1,6 @@
 import 'package:beeneatapp/src/Login.dart';
 import 'package:beeneatapp/src/home_page.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:beeneatapp/src/profile_page.dart';
 import 'package:beeneatapp/utils/fire_auth.dart';
