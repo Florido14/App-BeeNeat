@@ -7,22 +7,30 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
-        appBar: AppBar(
-            title: Text(
-          'BeeNeat',
-          textAlign: TextAlign.center,
-        )),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                  child: ListView(
+        body: Padding(
+          padding: const EdgeInsets.all(7),
+          child: Center(
+            child: Column(
+              
+              
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  miCard(context),
-                  miCardDesign(context),
-                ],
-              )),
-            ]));
+                  Padding(
+                  padding: const EdgeInsets.only(bottom: 40.0),
+                  child: Image.asset("assets/images/Logo2.png"),
+                ),
+                  Expanded(
+                      child: Flexible(
+                    child: ListView(
+                      children: <Widget>[
+                        miCard(context),
+                        miCardDesign(context),
+                      ],
+                    ),
+                  )),
+                ]),
+          ),
+        ));
   }
 
   Card miCard(BuildContext context) {

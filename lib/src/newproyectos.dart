@@ -55,7 +55,7 @@ class _NewProyectoState extends State<NewProyecto> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/fondologin.jpg"),
+                  image: AssetImage("assets/images/Fondo_New.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -71,7 +71,7 @@ class _NewProyectoState extends State<NewProyecto> {
                       decoration: myBoxDecoration(),
                       child: Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
+                            borderRadius: BorderRadius.circular(15)),
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
@@ -85,7 +85,7 @@ class _NewProyectoState extends State<NewProyecto> {
                                     children: <Widget>[
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(bottom: 10.0),
+                                            const EdgeInsets.only(bottom: 7.0),
                                         child: Text(
                                           'Nuevo Proyecto',
                                           textAlign: TextAlign.center,
@@ -176,7 +176,7 @@ class _NewProyectoState extends State<NewProyecto> {
                                       TextFormField(
                                         controller: _DescripcionController,
                                         focusNode: _focusDescripcion,
-                                        obscureText: true,
+                                        // obscureText: true,
                                         validator: (value) =>
                                             Validator.validatePassword(
                                           password: value,
