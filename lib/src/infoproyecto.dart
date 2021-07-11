@@ -2,12 +2,12 @@ import 'package:beeneatapp/src/infoproyecto.dart';
 import 'package:beeneatapp/src/newtask.dart';
 import 'package:flutter/material.dart';
 
-class ExistProyect extends StatefulWidget {
+class InfoProyect extends StatefulWidget {
   @override
-  _ExistProyectState createState() => _ExistProyectState();
+  _InfoProyectState createState() => _InfoProyectState();
 }
 
-class _ExistProyectState extends State<ExistProyect> {
+class _InfoProyectState extends State<InfoProyect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,49 +62,12 @@ class _ExistProyectState extends State<ExistProyect> {
             children: <Widget>[
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  'Tarea No. ',
+                  'Descripcion del proyecto:  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25, color: Colors.black),
                   textScaleFactor: 1,
                 ),
-              ]),
-              Divider(
-                  height: 20,
-                  thickness: 1,
-                  indent: 20,
-                  endIndent: 20,
-                  color: Colors.black),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(
-                  'Descripcion de la tarea:  ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  textScaleFactor: 1,
-                ),
-              ]
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  'Equipo asignado:   ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  textScaleFactor: 1,
-                ),
-              ],
-
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  'Complejidad:   ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  textScaleFactor: 1,
-                ),
-              ]
-
-              )                     
+              ]),   
             ],
           ),
         ),

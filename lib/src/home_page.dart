@@ -20,14 +20,13 @@ class HomePage extends StatelessWidget {
                   child: Image.asset("assets/images/Logo2.png"),
                 ),
                   Expanded(
-                      child: Flexible(
                     child: ListView(
                       children: <Widget>[
                         miCard(context),
                         miCardDesign(context),
                       ],
                     ),
-                  )),
+                  )
                 ]),
           ),
         ));
