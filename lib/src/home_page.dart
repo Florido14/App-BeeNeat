@@ -1,3 +1,4 @@
+import 'package:beeneatapp/src/mainproyectos.dart';
 import 'package:beeneatapp/src/newproyectos.dart';
 import 'package:beeneatapp/src/proyectos.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,9 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                    builder: (context) => ExistProyect(),
+                    builder: (context) => mainproyecto(),
                   ),
-                  ModalRoute.withName('/ExistProyect'),
+                  ModalRoute.withName('/mainproyecto'),
                 );
               },
             ),
