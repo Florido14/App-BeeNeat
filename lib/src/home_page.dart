@@ -12,14 +12,12 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(7),
           child: Center(
             child: Column(
-              
-              
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                  padding: const EdgeInsets.only(bottom: 40.0),
-                  child: Image.asset("assets/images/Logo2.png"),
-                ),
+                    padding: const EdgeInsets.only(bottom: 40.0),
+                    child: Image.asset("assets/images/Logo2.png"),
+                  ),
                   Expanded(
                     child: ListView(
                       children: <Widget>[
@@ -45,7 +43,7 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                    builder: (context) => mainproyecto(),
+                    builder: (context) => mainProyecto(),
                   ),
                   ModalRoute.withName('/mainproyecto'),
                 );

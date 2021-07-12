@@ -10,26 +10,29 @@ import 'package:flutter/material.dart';
 import 'Login.dart';
 
 class NewTask extends StatefulWidget {
+  String idKey;
+  NewTask(this.idKey);
   @override
-  _NewTaskState createState() => _NewTaskState();
+  _NewTaskState createState() {
+    return _NewTaskState(idKey);
+  }
 }
 
-final proyectosReferences =
-    FirebaseDatabase.instance.reference().child('Proyecto');
+final tareasReference = FirebaseDatabase.instance.reference().child('Tareas');
 
 class _NewTaskState extends State<NewTask> {
+  String idKey;
+  _NewTaskState(this.idKey);
   final _registerFormKey = GlobalKey<FormState>();
 
-  final _NombreProyectoController = TextEditingController();
-  final _LiderproyectoController = TextEditingController();
-  final _FechInicioController = TextEditingController();
-  final _FechFinController = TextEditingController();
+  final _NombreTareaController = TextEditingController();
+  final _EquipoController = TextEditingController();
+  final _ComplejidadController = TextEditingController();
   final _DescripcionController = TextEditingController();
 
-  final _focusNombreProyecto = FocusNode();
-  final _focusLiderproyecto = FocusNode();
-  final _focusFechInicio = FocusNode();
-  final _focusFechFin = FocusNode();
+  final _focusNombreTarea = FocusNode();
+  final _focusEquipo = FocusNode();
+  final _focusComplejidad = FocusNode();
   final _focusDescripcion = FocusNode();
 
   bool _isProcessing = false;
@@ -43,10 +46,9 @@ class _NewTaskState extends State<NewTask> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _focusNombreProyecto.unfocus();
-        _focusLiderproyecto.unfocus();
-        _focusFechInicio.unfocus();
-        _focusFechFin.unfocus();
+        _focusNombreTarea.unfocus();
+        _focusEquipo.unfocus();
+        _focusComplejidad.unfocus();
         _focusDescripcion.unfocus();
       },
       child: Scaffold(
@@ -90,6 +92,13 @@ class _NewTaskState extends State<NewTask> {
                                         ),
                                       ),
                                       TextFormField(
+                                        controller: _NombreTareaController,
+                                        focusNode: _focusNombreTarea,
+                                        // obscureText: true,
+                                        validator: (value) =>
+                                            Validator.validateName(
+                                          name: value,
+                                        ),
                                         decoration: InputDecoration(
                                           hintText: "Nombre de la tarea",
                                           errorBorder: UnderlineInputBorder(
@@ -103,6 +112,13 @@ class _NewTaskState extends State<NewTask> {
                                       ),
                                       SizedBox(height: 16.0),
                                       TextFormField(
+                                        controller: _EquipoController,
+                                        focusNode: _focusEquipo,
+                                        // obscureText: true,
+                                        validator: (value) =>
+                                            Validator.validateName(
+                                          name: value,
+                                        ),
                                         decoration: InputDecoration(
                                           hintText: "Equipo asignado",
                                           errorBorder: UnderlineInputBorder(
@@ -116,6 +132,13 @@ class _NewTaskState extends State<NewTask> {
                                       ),
                                       SizedBox(height: 16.0),
                                       TextFormField(
+                                        controller: _ComplejidadController,
+                                        focusNode: _focusComplejidad,
+                                        // obscureText: true,
+                                        validator: (value) =>
+                                            Validator.validateName(
+                                          name: value,
+                                        ),
                                         decoration: InputDecoration(
                                           hintText: "Complejidad ",
                                           errorBorder: UnderlineInputBorder(
@@ -132,6 +155,13 @@ class _NewTaskState extends State<NewTask> {
                                         margin: EdgeInsets.all(12),
                                         height: null,
                                         child: TextFormField(
+                                          controller: _DescripcionController,
+                                          focusNode: _focusDescripcion,
+                                          // obscureText: true,
+                                          validator: (value) =>
+                                              Validator.validateName(
+                                            name: value,
+                                          ),
                                           decoration: InputDecoration(
                                             hintText: "Descripcion",
                                             isDense: true,
@@ -146,6 +176,72 @@ class _NewTaskState extends State<NewTask> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 32.0),
+                                      if (_isProcessing)
+                                        CircularProgressIndicator()
+                                      else
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: ElevatedButton(
+                                                onPressed: () async {
+                                                  setState(() {
+                                                    _isProcessing = true;
+                                                  });
+
+                                                  setState(() {
+                                                    _isProcessing = false;
+                                                  });
+
+                                                  tareasReference.push().set({
+                                                    'NombreTarea':
+                                                        _NombreTareaController
+                                                            .text,
+                                                    'Lider':
+                                                        _EquipoController.text,
+                                                    'Complejidad':
+                                                        _ComplejidadController
+                                                            .text,
+                                                    'Descripcion':
+                                                        _DescripcionController
+                                                            .text,
+                                                    'IdProyecto': idKey
+                                                  }).then((_) {
+                                                    Navigator.of(context)
+                                                        .pushAndRemoveUntil(
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            HomePage(),
+                                                      ),
+                                                      ModalRoute.withName('/'),
+                                                    );
+                                                  }).catchError((e) {
+                                                    print(e);
+                                                  });
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    side: BorderSide(
+                                                        width: 1,
+                                                        color: Colors.grey),
+                                                    elevation: 10,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30)),
+                                                    padding:
+                                                        EdgeInsets.all(20)),
+                                                child: Text(
+                                                  'Crear Tarea',
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                     ],
                                   ),
                                 )

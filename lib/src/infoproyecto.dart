@@ -1,20 +1,59 @@
+import 'package:beeneatapp/Models/proyectos.dart';
 import 'package:beeneatapp/src/infoproyecto.dart';
 import 'package:beeneatapp/src/newtask.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+final proyectosReferences =
+    FirebaseDatabase.instance.reference().child('Proyecto');
+
 class InfoProyect extends StatefulWidget {
+  String idKey;
+  InfoProyect(this.idKey);
   @override
-  _InfoProyectState createState() => _InfoProyectState();
+  _InfoProyectState createState() {
+    return _InfoProyectState(idKey);
+  }
 }
 
 class _InfoProyectState extends State<InfoProyect> {
+  String idKey;
+  _InfoProyectState(this.idKey);
+  Proyectos proyecto = Proyectos("", "", "", "", "", "");
+  @override
+  void initState() {
+    super.initState();
+    getProyectos();
+  }
+
+  void getProyectos() {
+    proyecto = Proyectos("", "", "", "", "", "");
+    proyectosReferences.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> getMapPrductos = snapshot.value;
+      getMapPrductos.forEach((key, value) {
+        Map<dynamic, dynamic> f = value;
+        var idProyecto = key;
+        if (idProyecto == idKey) {
+          setState(() {
+            proyecto.idProyecto = key;
+            proyecto.nombreProyecto = f["NombreProyecto"];
+            proyecto.lider = f["Lider"];
+            proyecto.descripcion = f['Descripcion'];
+            proyecto.fechaInicio = f['FechaInicio'];
+            proyecto.fechaFin = f['FechaFin'];
+          });
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text('Proyecto: '),
+        title: Text('Proyecto: ${proyecto.nombreProyecto}'),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -22,7 +61,7 @@ class _InfoProyectState extends State<InfoProyect> {
               color: Colors.white,
             ),
             onPressed: () {
-              InfoProyect();
+              InfoProyect(idKey);
             },
           )
         ],
@@ -44,7 +83,7 @@ class _InfoProyectState extends State<InfoProyect> {
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (context) => NewTask(),
+                builder: (context) => NewTask(idKey),
               ),
               ModalRoute.withName(''));
         },
@@ -55,19 +94,37 @@ class _InfoProyectState extends State<InfoProyect> {
   Card miCardDesign(BuildContext context) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(50, 0.0, 50.0,50.0),
+        padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 50.0),
         child: Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  'Descripcion del proyecto:  ',
+                  'Lider: ${proyecto.lider}  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25, color: Colors.black),
                   textScaleFactor: 1,
                 ),
-              ]),   
+                Text(
+                  'Descripcion del proyecto: ${proyecto.descripcion}  ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25, color: Colors.black),
+                  textScaleFactor: 1,
+                ),
+                Text(
+                  'Fecha Inicio: ${proyecto.fechaInicio}  ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25, color: Colors.black),
+                  textScaleFactor: 1,
+                ),
+                Text(
+                  'Fecha Fin: ${proyecto.fechaFin}  ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25, color: Colors.black),
+                  textScaleFactor: 1,
+                ),
+              ]),
             ],
           ),
         ),

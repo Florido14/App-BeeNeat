@@ -1,8 +1,46 @@
+import 'package:beeneatapp/Models/proyectos.dart';
+import 'package:beeneatapp/src/infoproyecto.dart';
 import 'package:beeneatapp/src/newproyectos.dart';
 import 'package:beeneatapp/src/proyectos.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class mainproyecto extends StatelessWidget {
+final proyectosReferences =
+    FirebaseDatabase.instance.reference().child('Proyecto');
+List<Proyectos> lstProyectos = [];
+
+class mainProyecto extends StatefulWidget {
+  const mainProyecto({Key? key}) : super(key: key);
+
+  @override
+  _mainProyectoState createState() => _mainProyectoState();
+}
+
+class _mainProyectoState extends State<mainProyecto> {
+  @override
+  void initState() {
+    super.initState();
+    getProyectos();
+  }
+
+  void getProyectos() {
+    lstProyectos = [];
+    proyectosReferences.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> getMapPrductos = snapshot.value;
+      getMapPrductos.forEach((key, value) {
+        Map<dynamic, dynamic> f = value;
+        Proyectos proyectosExistentes = Proyectos("", "", "", "", "", "");
+        var s = f["Precio"];
+        proyectosExistentes.idProyecto = key;
+        proyectosExistentes.nombreProyecto = f["NombreProyecto"];
+        proyectosExistentes.lider = f["Lider"];
+        setState(() {
+          lstProyectos.add(proyectosExistentes);
+        });
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,58 +49,69 @@ class mainproyecto extends StatelessWidget {
           padding: const EdgeInsets.all(7),
           child: Center(
             child: Column(
-              
-              
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                  padding: const EdgeInsets.only(bottom: 40.0),
-                  child: Image.asset("assets/images/Logo2.png"),
-                ),
+                    padding: const EdgeInsets.only(bottom: 40.0),
+                    child: Image.asset("assets/images/Logo2.png"),
+                  ),
                   Expanded(
-                    child: ListView(
-                      children: <Widget>[
-                        miCardDesign(context),
-                      ],
-                    ),
+                    flex: 6,
+                    child: ListView.builder(
+                        itemCount: lstProyectos.length,
+                        itemBuilder: (context, index) {
+                          return miCardDesign(
+                              context,
+                              "${lstProyectos[index].idProyecto}",
+                              "${lstProyectos[index].nombreProyecto}",
+                              "${lstProyectos[index].lider}");
+                        }),
                   )
                 ]),
           ),
         ));
   }
 
-  Card miCardDesign(BuildContext context) {
+  Card miCardDesign(
+      BuildContext context, String idProyecto, String nombre, String lider) {
     return Card(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(50, 0.0, 50.0,50.0),
-        child: Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(
-                  'Proyecto:  ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, color: Colors.black),
-                  textScaleFactor: 1,
-                ),
-              ]),
-              Divider(
-                  height: 20,
-                  thickness: 1,
-                  indent: 20,
-                  endIndent: 20,
-                  color: Colors.black),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(
-                  'Descripcion del proyecto:  ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  textScaleFactor: 1,
-                ),
-              ]
-              ),            
-            ],
+      child: TextButton(
+        onPressed: () {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => InfoProyect(idProyecto),
+            ),
+            ModalRoute.withName('/infoProyecto'),
+          );
+        },
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(50, 0.0, 50.0, 50.0),
+          child: Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    'Proyecto: $nombre ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 25, color: Colors.black),
+                    textScaleFactor: 1,
+                  ),
+                  Divider(
+                      height: 20,
+                      thickness: 1,
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.black),
+                  Text(
+                    'Lider: $lider',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    textScaleFactor: 1,
+                  ),
+                ]),
+              ],
+            ),
           ),
         ),
       ),

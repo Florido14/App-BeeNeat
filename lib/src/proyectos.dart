@@ -8,6 +8,7 @@ class ExistProyect extends StatefulWidget {
 }
 
 class _ExistProyectState extends State<ExistProyect> {
+  String idProyecto = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,7 @@ class _ExistProyectState extends State<ExistProyect> {
               color: Colors.white,
             ),
             onPressed: () {
-              InfoProyect();
+              InfoProyect(idProyecto);
             },
           )
         ],
@@ -44,7 +45,7 @@ class _ExistProyectState extends State<ExistProyect> {
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (context) => NewTask(),
+                builder: (context) => NewTask(idProyecto),
               ),
               ModalRoute.withName(''));
         },
@@ -55,7 +56,7 @@ class _ExistProyectState extends State<ExistProyect> {
   Card miCardDesign(BuildContext context) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(50, 0.0, 50.0,50.0),
+        padding: EdgeInsets.fromLTRB(50, 0.0, 50.0, 50.0),
         child: Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -74,37 +75,33 @@ class _ExistProyectState extends State<ExistProyect> {
                   indent: 20,
                   endIndent: 20,
                   color: Colors.black),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
                   'Descripcion de la tarea:  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15, color: Colors.black),
                   textScaleFactor: 1,
                 ),
-              ]
-              ),
+              ]),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  'Equipo asignado:   ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  textScaleFactor: 1,
-                ),
-              ],
-
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Equipo asignado:   ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    textScaleFactor: 1,
+                  ),
+                ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text(
                   'Complejidad:   ',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15, color: Colors.black),
                   textScaleFactor: 1,
                 ),
-              ]
-
-              )                     
+              ])
             ],
           ),
         ),
