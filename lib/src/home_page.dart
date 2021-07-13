@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 40.0),
+                    padding: const EdgeInsets.only(bottom: 40.0, top: 30.0),
                     child: Image.asset("assets/images/Logo2.png"),
                   ),
                   Expanded(

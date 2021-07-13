@@ -2,6 +2,7 @@ import 'package:beeneatapp/Models/proyectos.dart';
 import 'package:beeneatapp/src/infoproyecto.dart';
 import 'package:beeneatapp/src/newproyectos.dart';
 import 'package:beeneatapp/src/proyectos.dart';
+import 'package:beeneatapp/src/home_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -52,11 +53,19 @@ class _mainProyectoState extends State<mainProyecto> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 40.0),
-                    child: Image.asset("assets/images/Logo2.png"),
+                    padding: const EdgeInsets.only(bottom: 40.0, top: 30.0),
+                    child: MaterialButton(
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                              ModalRoute.withName('/Landing'));
+                        },
+                        child: Image.asset("assets/images/Logo2.png")),
                   ),
                   Expanded(
-                    flex: 6,
+                    flex: 5,
                     child: ListView.builder(
                         itemCount: lstProyectos.length,
                         itemBuilder: (context, index) {
@@ -79,9 +88,9 @@ class _mainProyectoState extends State<mainProyecto> {
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => InfoProyect(idProyecto),
+              builder: (context) => ExistProyect(idProyecto),
             ),
-            ModalRoute.withName('/infoProyecto'),
+            ModalRoute.withName('/existProyect'),
           );
         },
         child: Padding(

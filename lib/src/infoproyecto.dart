@@ -1,4 +1,5 @@
 import 'package:beeneatapp/Models/proyectos.dart';
+import 'package:beeneatapp/src/home_page.dart';
 import 'package:beeneatapp/src/infoproyecto.dart';
 import 'package:beeneatapp/src/newtask.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -53,18 +54,28 @@ class _InfoProyectState extends State<InfoProyect> {
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text('Proyecto: ${proyecto.nombreProyecto}'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.info,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              InfoProyect(idKey);
-            },
-          )
-        ],
+        title: Text('${proyecto.nombreProyecto}'),
+        leading: IconButton(
+          icon: Icon(Icons.home),
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+                ModalRoute.withName('/Landing'));
+          },
+        ),
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.info,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       InfoProyect(idKey);
+        //     },
+        //   )
+        // ],
       ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -77,17 +88,17 @@ class _InfoProyectState extends State<InfoProyect> {
               ),
             ),
           ]),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => NewTask(idKey),
-              ),
-              ModalRoute.withName(''));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.green,
+      //   child: Icon(Icons.add),
+      //   onPressed: () {
+      //     Navigator.of(context).pushAndRemoveUntil(
+      //         MaterialPageRoute(
+      //           builder: (context) => NewTask(idKey),
+      //         ),
+      //         ModalRoute.withName(''));
+      //   },
+      // ),
     );
   }
 
@@ -101,7 +112,7 @@ class _InfoProyectState extends State<InfoProyect> {
             children: <Widget>[
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  'Lider: ${proyecto.lider}  ',
+                  'Equipo: ${proyecto.lider}  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25, color: Colors.black),
                   textScaleFactor: 1,

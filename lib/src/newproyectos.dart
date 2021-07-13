@@ -64,7 +64,15 @@ class _NewProyectoState extends State<NewProyecto> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: Image.asset("assets/images/Logo1.png")),
+                        child: MaterialButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                  ModalRoute.withName('/Landing'));
+                            },
+                            child: Image.asset("assets/images/Logo1.png"))),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       padding: const EdgeInsets.all(5.0),
