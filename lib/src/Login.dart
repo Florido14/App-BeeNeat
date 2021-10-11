@@ -30,10 +30,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (user != null) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => 
-          HomePage ()
-        ),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     }
 
@@ -48,14 +45,13 @@ class _LoginPageState extends State<LoginPage> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/Fondologin1.jpg"),
-              fit: BoxFit.cover,
-            ),
-          ),
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.teal.shade600, Colors.teal.shade100])),
           child: FutureBuilder(
             future: _initializeFirebase(),
             builder: (context, snapshot) {
@@ -66,9 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Image.asset("assets/images/Logo1.png")
-                      ),
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: Image.asset("assets/images/Logo1.png")),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
                         child: Text(
@@ -78,12 +73,12 @@ class _LoginPageState extends State<LoginPage> {
                           textScaleFactor: 1,
                         ),
                       ),
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.only(bottom: 40.0),
                         child: Text(
                           'Planifica, organiza y crea tu siguiente proyecto',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 25, color: Colors.grey),
+                          style: TextStyle(fontSize: 25, color: Colors.white),
                           textScaleFactor: 1,
                         ),
                       ),
@@ -126,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                           SizedBox(height: 150.0),
+                            SizedBox(height: 150.0),
                             _isProcessing
                                 ? CircularProgressIndicator()
                                 : Row(
@@ -167,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     .pushReplacement(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                      HomePage (),
+                                                        HomePage(),
                                                     //  ProfilePage(user: user),
                                                   ),
                                                 );
@@ -197,7 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               },
-                              child: const Text('¿Aún no tienes una cuenta?'),
+                              child: const Text('¿Aún no tienes una cuenta?',
+                              style: TextStyle(color: Colors.white),),
                             ),
                           ],
                         ),

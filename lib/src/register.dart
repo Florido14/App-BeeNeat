@@ -47,11 +47,10 @@ class _RegisterPageState extends State<RegisterPage> {
           body: Center(
             child: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/fondologin.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Colors.deepPurple, Colors.blue])),
               child: Center(
                 child: Column(
                   children: [
@@ -208,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   }
                                                 },
                                                 style: ElevatedButton.styleFrom(
-                                                    primary: Colors.white,
+                                                    primary: Colors.blue.shade400,
                                                     side: BorderSide(
                                                         width: 1,
                                                         color: Colors.grey),

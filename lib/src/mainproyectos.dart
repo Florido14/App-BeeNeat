@@ -46,7 +46,12 @@ class _mainProyectoState extends State<mainProyecto> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
-        body: Padding(
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.teal.shade600, Colors.teal.shade100])),
           padding: const EdgeInsets.all(7),
           child: Center(
             child: Column(
@@ -62,7 +67,7 @@ class _mainProyectoState extends State<mainProyecto> {
                               ),
                               ModalRoute.withName('/Landing'));
                         },
-                        child: Image.asset("assets/images/Logo2.png")),
+                        child: Image.asset("assets/images/Logo1.png")),
                   ),
                   Expanded(
                     flex: 5,

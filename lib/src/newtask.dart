@@ -53,7 +53,12 @@ class _NewTaskState extends State<NewTask> {
       },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: Center(
+          body: Container(
+             decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.teal.shade600, Colors.teal.shade100])),
             child: Container(
               child: Center(
                 child: Column(

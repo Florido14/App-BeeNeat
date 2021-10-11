@@ -41,13 +41,15 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/Logo.png"
+  image_path: "assets/images/Logo2.png"
   flutter_native_splash: ^0.2.8
 flutter_native_splash:
-  color: "#ffffff"
-  image: assets/images/splash.jpg
+  color: "#05998DF1"
   android: true
   ios: true
+  fullscreen: true
+  android_gravity: center
+  image: assets/images/Logo1.png
 
 
 # For information on the generic Dart part of this file, see the

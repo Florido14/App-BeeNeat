@@ -51,7 +51,6 @@ class _InfoProyectState extends State<InfoProyect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('${proyecto.nombreProyecto}'),
@@ -77,9 +76,13 @@ class _InfoProyectState extends State<InfoProyect> {
         //   )
         // ],
       ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+      body: Container(
+        decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.teal.shade600, Colors.teal.shade100])),
+          child:
             Expanded(
               child: ListView(
                 children: <Widget>[
@@ -87,7 +90,7 @@ class _InfoProyectState extends State<InfoProyect> {
                 ],
               ),
             ),
-          ]),
+          ),
       // floatingActionButton: FloatingActionButton(
       //   backgroundColor: Colors.green,
       //   child: Icon(Icons.add),

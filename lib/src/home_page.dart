@@ -8,7 +8,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
-        body: Padding(
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.teal.shade300, Colors.teal.shade100])),
           padding: const EdgeInsets.all(7),
           child: Center(
             child: Column(
@@ -16,7 +21,7 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 40.0, top: 30.0),
-                    child: Image.asset("assets/images/Logo2.png"),
+                    child: Image.asset("assets/images/Logo1.png"),
                   ),
                   Expanded(
                     child: ListView(

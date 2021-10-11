@@ -82,7 +82,6 @@ class _ExistProyectState extends State<ExistProyect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('Proyecto: ${proyecto.nombreProyecto} '),
@@ -113,10 +112,14 @@ class _ExistProyectState extends State<ExistProyect> {
           )
         ],
       ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
+      body: Container(
+        decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.teal.shade600, Colors.teal.shade100])),
+          child: 
+          Expanded(
               flex: 6,
               child: ListView.builder(
                   itemCount: lstTareas.length,
@@ -128,7 +131,7 @@ class _ExistProyectState extends State<ExistProyect> {
                         "${lstTareas[index].descripcion}");
                   }),
             ),
-          ]),
+          ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         child: Icon(Icons.add),
